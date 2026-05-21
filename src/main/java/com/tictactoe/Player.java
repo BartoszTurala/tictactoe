@@ -1,4 +1,4 @@
-package org.example;
+package com.tictactoe;
 
 public class Player {
 

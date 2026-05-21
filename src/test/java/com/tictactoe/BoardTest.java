@@ -1,4 +1,4 @@
-package org.example;
+package com.tictactoe;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BoardTest {
 
@@ -19,8 +19,6 @@ class BoardTest {
     void setUp() {
         board = new Board();
     }
-
-    // ---------- isCellEmpty ----------
 
     @Test
     void isCellEmpty_returnsTrue_forFreshBoard() {
@@ -40,8 +38,6 @@ class BoardTest {
         assertThrows(IndexOutOfBoundsException.class, () -> board.isCellEmpty(0, 3));
     }
 
-    // ---------- place ----------
-
     @Test
     void place_writesMarkerIntoEmptyCell() {
         board.place(0, 1, 'X');
@@ -58,8 +54,6 @@ class BoardTest {
     void place_throwsOnOutOfBounds() {
         assertThrows(IndexOutOfBoundsException.class, () -> board.place(5, 5, 'X'));
     }
-
-    // ---------- isFull ----------
 
     @Test
     void isFull_returnsFalse_forEmptyBoard() {
@@ -83,8 +77,6 @@ class BoardTest {
         assertTrue(board.isFull());
     }
 
-    // ---------- clear ----------
-
     @Test
     void clear_resetsAllCellsBackToEmpty() {
         board.place(0, 0, 'X');
@@ -104,8 +96,6 @@ class BoardTest {
         assertTrue(board.isCellEmpty(1, 1));
     }
 
-    // ---------- getCell ----------
-
     @Test
     void getCell_returnsEmptyForUnsetCell() {
         assertEquals(Board.EMPTY, board.getCell(0, 0));
@@ -115,8 +105,6 @@ class BoardTest {
     void getCell_throwsForOutOfBounds() {
         assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(3, 3));
     }
-
-    // ---------- print ----------
 
     @Test
     void print_writesNonEmptyOutputToStdout() {
@@ -151,4 +139,3 @@ class BoardTest {
         assertTrue(printed.contains("O"));
     }
 }
-
