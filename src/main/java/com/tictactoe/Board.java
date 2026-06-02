@@ -48,18 +48,26 @@ public class Board {
     }
 
 
-    public void print() {
+
+    @Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(" -----------").append(System.lineSeparator());
+        sb.append("    0   1   2").append(System.lineSeparator());
+        sb.append("  +---+---+---+").append(System.lineSeparator());
         for (int i = 0; i < SIZE; i++) {
-            sb.append("| ");
+            sb.append(i).append(" |");
             for (int j = 0; j < SIZE; j++) {
-                sb.append(cells[i][j]).append(" | ");
+                sb.append(" ").append(cells[i][j]).append(" |");
             }
             sb.append(System.lineSeparator());
-            sb.append(" -----------").append(System.lineSeparator());
+            sb.append("  +---+---+---+").append(System.lineSeparator());
         }
-        System.out.print(sb);
+        return sb.toString();
+    }
+
+
+    public void print() {
+        System.out.print(toString());
     }
 
 
