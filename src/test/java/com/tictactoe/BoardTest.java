@@ -138,4 +138,37 @@ class BoardTest {
         assertTrue(printed.contains("X"));
         assertTrue(printed.contains("O"));
     }
+
+    @Test
+    void toString_includesColumnHeaders_0_1_2() {
+        String rendered = board.toString();
+        assertTrue(rendered.contains("0"));
+        assertTrue(rendered.contains("1"));
+        assertTrue(rendered.contains("2"));
+    }
+
+    @Test
+    void toString_emptyBoard_containsNoMarkers() {
+        String rendered = board.toString();
+        assertFalse(rendered.contains("X"));
+        assertFalse(rendered.contains("O"));
+    }
+
+    @Test
+    void toString_includesPlacedMarkers() {
+        board.place(0, 0, 'X');
+        board.place(2, 2, 'O');
+        String rendered = board.toString();
+        assertTrue(rendered.contains("X"));
+        assertTrue(rendered.contains("O"));
+    }
+
+    @Test
+    void toString_isMultilineGridLayout() {
+        String rendered = board.toString();
+        // Header + 3 rows + 4 separators -> at least 7 lines
+        long lineCount = rendered.lines().count();
+        assertTrue(lineCount >= 7, "Expected at least 7 lines, got " + lineCount);
+    }
+
 }
