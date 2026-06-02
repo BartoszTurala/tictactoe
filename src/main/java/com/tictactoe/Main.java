@@ -1,11 +1,12 @@
 package com.tictactoe;
 
 public final class Main {
+
     private Main() {
+        // utility class
     }
 
     public static void main(String[] args) {
-
-        System.out.println("TicTacToe – stub. Full game arrives in US-03.");
+        new TicTacToe().start();
     }
 }
