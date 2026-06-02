@@ -163,4 +163,62 @@ class TicTacToeTest {
         }
         return out.toString();
     }
+
+
+    @Test
+    void start_replaysGameWhenAnswerIsYes() {
+        // Game 1: X wins middle row. Answer "y".
+        // Game 2: X wins top row. Answer "n".
+        String input = String.join("\n",
+                "1", "1",
+                "0", "0",
+                "1", "0",
+                "0", "1",
+                "1", "2",   // X wins game 1
+                "y",
+                "0", "0",
+                "1", "0",
+                "0", "1",
+                "1", "1",
+                "0", "2",   // X wins game 2
+                "n",
+                "");
+        String output = runGame(input);
+        int winCount = output.split("Player X wins!", -1).length - 1;
+        assertEquals(2, winCount,
+                "Expected two wins across replays, got " + winCount + ":\n" + output);
+    }
+
+    @Test
+    void start_doesNotReplayWhenAnswerIsNo() {
+        String input = String.join("\n",
+                "1", "1",
+                "0", "0",
+                "1", "0",
+                "0", "1",
+                "1", "2",
+                "n",
+                "");
+        String output = runGame(input);
+        int winCount = output.split("Player X wins!", -1).length - 1;
+        assertEquals(1, winCount, "Expected exactly one game played, got " + winCount);
+        assertTrue(output.contains("Thanks for playing"));
+    }
+
+    @Test
+    void start_treatsInvalidReplayAnswerAsNo() {
+        // Any answer that does not start with "y" should end the session.
+        String input = String.join("\n",
+                "1", "1",
+                "0", "0",
+                "1", "0",
+                "0", "1",
+                "1", "2",
+                "maybe",
+                "");
+        String output = runGame(input);
+        int winCount = output.split("Player X wins!", -1).length - 1;
+        assertEquals(1, winCount, "Invalid replay answer should not start a new game.");
+    }
+
 }

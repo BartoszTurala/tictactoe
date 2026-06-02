@@ -24,8 +24,15 @@ public class TicTacToe {
     }
 
 
+
     public void start(Scanner scanner) {
-        playRound(scanner);
+        boolean playAgain = true;
+        while (playAgain) {
+            board.clear();
+            currentPlayer = player1;
+            playRound(scanner);
+            playAgain = askPlayAgain(scanner);
+        }
         System.out.println("Thanks for playing!");
     }
 
@@ -72,6 +79,14 @@ public class TicTacToe {
             System.out.print("Please enter a number. " + prompt);
         }
         return scanner.nextInt();
+    }
+    private boolean askPlayAgain(Scanner scanner) {
+        System.out.print("Play another game? (y/n): ");
+        if (!scanner.hasNext()) {
+            return false;
+        }
+        String input = scanner.next().trim().toLowerCase();
+        return input.startsWith("y");
     }
 
 
